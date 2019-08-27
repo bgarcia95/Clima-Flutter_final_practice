@@ -20,16 +20,14 @@ class WeatherModel {
 //  https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b6907d289e10d714a6e88b30761fae22
   Future getCurrentLocationWeather() async {
     Location location = Location();
+    await location.getLocation();
 
-    var networkHelper = NetworkHelper(
+    NetworkHelper networkHelper = NetworkHelper(
         url:
-            '$openWeatherMapURL?lat=${location.latitude}lon=${location.longitude}&appid=$apiKey&units=metric');
+            '$openWeatherMapURL?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric');
+    var weather = await networkHelper.getData();
 
-    try {
-      await location.getLocation();
-      var weather = await networkHelper.getData();
-      return weather;
-    } catch (e) {}
+    return weather;
   }
 
   String getWeatherIcon(int condition) {

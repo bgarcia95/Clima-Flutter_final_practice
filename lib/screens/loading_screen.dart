@@ -13,6 +13,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
     super.initState();
   }
 
+  void getLocationData() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
